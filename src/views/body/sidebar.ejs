@@ -1,0 +1,123 @@
+<!-- Sidebar -->
+
+<aside id="sidebar" class="bg-theme-gray expand sidebar h-100">
+  <div class="d-flex px-3 py-4 border-bottom">
+    <div class="d-flex col-12" id="ctn-logo">
+      <div class="col-10 sidebar-logo mb-0 d-flex" id="logo">
+        <div class="rounded d-flex justify-content-center align-items-center mt-1 mb-0 me-2">
+          <img src="/ico/favicon.ico" class="rounded-circle" width="40">
+        </div>
+        <div class="text-center">
+          <p class="fs-4 fw-semibold mt-2 mb-2 text-start">SCRTV</p>
+        </div>
+      </div>
+      <a class="col-2 fs-4 nav-linkh-100 d-flex justify-content-center align-items-center btn btn-sidebar mb-0"
+        id="collect-btn">
+        <i class="bi bi-layout-text-sidebar fs-6"></i>
+      </a>
+    </div>
+    <br>
+  </div>
+
+  <ul class="sidebar-nav">
+    <li class="nav-small-cap px-3 my-2">
+      <span class="hide-menu">MENU</span>
+    </li>
+    <li class="sidebar-item">
+      <a href="#" class="sidebar-link has-dropdown
+      collapsed" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="true" aria-controls="auth">
+        <i class="bi bi-car-front-fill"></i>
+        <span>Ingreso vehicular</span>
+      </a>
+      <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+        <li class="sidebar-item">
+          <a href="/ingreso-vehicular/ingreso-vehiculos" class="sidebar-link">
+            <i class="bi bi-circle m-3 fs-10"></i>
+            <span>Ingreso de vehículos</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="/ingreso-vehicular/listado-revisiones" class="sidebar-link">
+            <i class="bi bi-circle m-3 fs-10"></i>
+            <span>Listado de revisiones</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="sidebar-item">
+      <a href="#" class="sidebar-link has-dropdown
+      collapsed" data-bs-toggle="collapse" data-bs-target="#conf-parametros" aria-expanded="true" aria-controls="conf-parametros">
+        <i class="bi bi-gear me-2"></i>
+        <span>Conf. Parámetros</span>
+      </a>
+      <ul id="conf-parametros" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+        <li class="sidebar-item">
+          <a href="/configuracion-parametros/listado-pruebas" class="sidebar-link">
+            <i class="bi bi-circle m-3 fs-10"></i>
+            <span>Listado de pruebas</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="/configuracion-parametros/listado-equipos" class="sidebar-link">
+            <i class="bi bi-circle m-3 fs-10"></i>
+            <span>Listado de equipos</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="/configuracion-parametros/listado-resultados-capacidad-carga" class="sidebar-link">
+            <i class="bi bi-circle m-3 fs-10"></i>
+            <span>Listado de resultados (peso)</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="sidebar-item">
+      <a href="#" class="sidebar-link has-dropdown
+      collapsed" data-bs-toggle="collapse" data-bs-target="#auth2" aria-expanded="true" aria-controls="auth2">
+        <i class="bi bi-gear me-2"></i>
+        <span>Conf. General</span>
+      </a>
+      <ul id="auth2" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+        <li class="sidebar-item">
+          <a href="/configuracion-general/configuracion" class="sidebar-link">
+            <i class="bi bi-circle m-3 fs-10"></i>
+            <span>General</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+
+  <div class="p-3" id="info-profile">
+    <div class="rounded border">
+      <div class="p-1 m-1 mb-2 d-flex align-items-center justify-content-between bg-theme-gray border-bottom"
+        id="info-sesion">
+        <div class="row col-9 info-usuario">
+          <span class="fs-6 fw-normal" id="nombre_usuario">
+            <%= user.nombre_usuario_corto %>
+          </span>
+          <span class="fs-6 fw-semibold">EMMSZACH E.P.</span>
+        </div>
+
+        <a href="/login" class="fs-4 nav-link col-3 d-flex justify-content-center align-items-center btn btn-exit py-2"
+          role="button" title="Cerrar sesión" id="btn-cerrarSesion">
+          <i class="bi bi-box-arrow-left"></i>
+        </a>
+      </div>
+
+      <div class="p-1 m-1 align-items-center justify-content-between bg-theme-gray info-theme">
+        <div class="btn-group col-12">
+          <button class="btn btn-sm shuffle-click btn-theme-color" data-theme="light">
+            <i class="bi bi-sun me-2"></i>
+          </button>
+          <button class="btn btn-sm shuffle-click active btn-theme-color" data-theme="dark">
+            <i class="bi bi-moon-fill me-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</aside>

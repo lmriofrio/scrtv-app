@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+  <script src="/js/login.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+
+
+</head>
+
+<body>
+  <main class="page-wrapper" id="main-wrapper" data-layout="vertical" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+
+
+    <body data-sidebartype="full">
+      <div id="main-wrapper">
+        <div class="min-vh-100 d-flex">
+
+          <div class="col-xl-6 d-flex align-items-center justify-content-center bg-body p-4">
+            <div class="w-100 h-100 d-flex   justify-content-center row">
+
+              <div class="col-md-12 col-lg-12 pb-0 px-0">
+                <div class="col-12 form-check form-switch d-flex gap-2 p-0">
+                  <div class="info-theme">
+                    <div class="col-12  d-flex align-items-center justify-content-center" id="logo">
+                      <div class="rounded d-flex justify-content-center align-items-center mt-2 mb-2">
+                        <img src="/ico/favicon.ico" class="rounded-circle" width="40" height="44">
+                      </div>
+                      <div class="text-center">
+                        <p class="mb-0 fs-3 px-3 fw-semibold">Emmov</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-10 col-lg-10">
+                <div class="col-lg-12 cardlogin px-0 py-3">
+                  <div class="card-body col-lg-9">
+              
+
+                    <div class="mb-4 pb-4">
+                      <p class="fs-2 fw-semibold text-start mb-0">Bienvenido a SCRTV</p>
+                      <p class="text-muted-dark small mt-1">Sistema de Calificación de Revisiones Técnicas Vehiculares</p>
+                    </div>
+              
+
+                    <form id="loginFormulario" action="/login" method="post">
+                      <div class="mb-3">
+                        <label for="username" class="form-label fw-normal">Usuario:</label>
+                        <input type="text" name="username" id="username" class="form-control"
+                               placeholder="Ingresa el nombre de usuario" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="password" class="form-label fw-normal">Contraseña:</label>
+                        <input type="password" name="password" id="password" class="form-control"
+                               placeholder="Ingresa la contraseña" required>
+                      </div>
+
+                      <div class="form-group mb-3">
+                        <label id="errorPasswordMessage" class="text-danger d-none">Contraseña incorrecta</label>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary-empresa w-100 py-3 fw-semibold rounded-2 mt-3" id="btnIngresar">
+                        INGRESAR
+                      </button>
+                    </form>
+              
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                      <p class="text-muted-dark small m-0">Versión 1.0.0</p>
+              
+                      <div class="btn-group">
+                        <button class="btn shuffle-click btn-theme-color" data-theme="light">
+                          <i class="bi bi-sun me-2"></i>
+                        </button>
+                        <button class="btn shuffle-click active btn-theme-color" data-theme="dark">
+                          <i class="bi bi-moon-fill me-2"></i>
+                        </button>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+              
+
+
+
+            </div>
+          </div>
+
+          <div class="col-xl-6 justify-content-center align-items-center bg-primary">
+            <a href="../main/index.html" class="mb-5">
+
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </body>
+
+
+  </main>
+</body>
+
+<script>
+  document.getElementById('toggleTheme').addEventListener('click', function () {
+    let html = document.documentElement;
+    let currentTheme = html.getAttribute('data-bs-theme');
+    let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    html.setAttribute('data-bs-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    let savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-bs-theme', savedTheme);
+  });
+</script>
+
+
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingreso de vehículos</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+
+  <script src="/js/consultasWS.js"></script>
+  <script src="/js/ordenesTrabajoWS.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+
+
+</head>
+
+<body>
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-sidebar-position="fixed"
+    data-sidebartype="full">
+
+    <!--  Encabezado de pagina -->
+    <%- include('../body/sidebar') %>
+
+      <!-- Page Content -->
+      <div id="content-wrapper" class="content-wrapper">
+
+
+        <div class="container-fluid">
+          <div class="content px-2">
+
+            <div class="bg-primario-empresa rounded-top">
+              <div class="col-12 d-flex">
+                <h3 class="mb-0">Ingreso de vehículos</h3>
+              </div>
+              <p class="text-muted mb-4">Creación de órdenes de trabajo de RTV</p>
+              <div class="border-bottom"></div>
+            </div>
+
+
+
+
+
+            <div class="col-3 mb-3 mt-4">
+              <label for="placa" class="form-label fw-semibold">Ingrese la placa del vehiculo</label>
+              <div class="input-group">
+                <input type="text" id="placa" name="placa" class="form-control text-uppercase" placeholder=""
+                  maxlength="7">
+                <button class="btn btn-dark" id="buscarVehiculoANT" name="buscarVehiculoANT">Consultar
+                  ANT</button>
+              </div>
+
+            </div>
+
+            <div class="mb-3 mt-3">
+              <div class="d-flex flex-column gap-2 mt-2">
+                <small class="text-muted d-flex align-items-center d-none" id="vehiculoEncontrado">
+                  <i class="bi bi-check-circle-fill text-success me-2"></i> Vehículo encontrado en la ANT
+                </small>
+                <small class="text-muted d-flex align-items-center d-none" id="vehiculoNoEncontrado">
+                  <i class="bi bi-x-circle-fill text-danger me-2"></i> Vehículo NO encontrado en la ANT
+                </small>
+
+                <small class="text-muted d-flex align-items-center d-none" id="errorConexionANT">
+                  <i class="bi bi-x-circle-fill text-danger me-2"></i> Error al conectarse a la base de datos de la ANT
+                </small>
+              </div>
+
+              <div class="d-flex flex-column mt-4 p-3 border rounded d-none" id="errorANT_SV">
+                <h5 class="text-danger">Error ANT</h5>
+                <div class="d-flex gap-2"><strong>Código de error:</strong> <span id="errorCodigo_SV"></span></div>
+                <div class="d-flex gap-2"><strong>Mensaje de ANT:</strong> <span id="errorMensaje_SV"></span></div>
+              </div>
+
+              <div class="d-flex flex-column mt-4 p-3 border rounded d-none" id="errorANT_otros">
+                <h5 class="text-danger">Error ANT</h5>
+                <div class="d-flex gap-2"><strong>Código de error:</strong> <span id="errorCodigo_otros"></span></div>
+                <div class="d-flex gap-2"><strong>Mensaje de ANT:</strong> <span id="errorMensaje_otros"></span></div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-8 mt-4 align-items-center justify-content-center d-none d-flex align-items-stretch"
+                  id="info-vehiculo">
+                  <div class="card w-100">
+                    <div class="card-header p-3 fw-semibold">
+                      DATOS DEL VEHÍCULO
+                    </div>
+                    <div class="card-body p-4">
+                      <div class="col-12 d-flex">
+                        <div class="col-6 mb-2">
+                          <div class="col pt-1 mx-auto d-flex flex-column align-items-center">
+
+                            <input type="text" class="form-control d-none" name="vsl_placa" id="vsl_placa" required>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Rawn/Cpn:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_rawn" id="vsl_rawn" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Chasis:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_chasis" id="vsl_chasis" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Motor:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_motor" id="vsl_motor" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Color 1:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_color1" id="vsl_color1" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">País:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_pais" id="vsl_pais" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Marca:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_marca" id="vsl_marca" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Numero de ejes:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_numero_ejes" id="vsl_numero_ejes"
+                                    required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Numero de ruedas:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_numero_ruedas"
+                                    id="vsl_numero_ruedas" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-6 mb-2">
+                          <div class="col pt-1 mx-auto d-flex flex-column align-items-center">
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Año:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_año" id="vsl_año" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Capacidad:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_capacidad" id="vsl_capacidad"
+                                    required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Combustible:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_combustible" id="vsl_combustible"
+                                    required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Modelo:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_modelo" id="vsl_modelo" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Clase de
+                                  transporte:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_clase_transporte"
+                                    id="vsl_clase_transporte" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Clase de servicio:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_clase_servicio"
+                                    id="vsl_clase_servicio" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Tonelaje:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_tonelaje" id="vsl_tonelaje"
+                                    required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Tipo de peso:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="vsl_tipo_peso" id="vsl_tipo_peso"
+                                    required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-4 mt-4 align-items-center justify-content-center d-none d-flex align-items-stretch"
+                  id="info-orden">
+                  <div class="card w-100">
+                    <div class="card-header p-3 fw-semibold">
+                      ORDEN DE TRABAJO
+                    </div>
+
+                    <div class="card-body p-4">
+                      <div class="col-12 d-flex">
+                        <div class="col-12 mb-2">
+                          <div class="col pt-1 mx-auto d-flex flex-column align-items-center">
+
+                            <input type="text" class="form-control d-none" name="vsl_placa" id="vsl_placa" required>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Proceso:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="info_ot_proceso" id="info_ot_proceso"
+                                    value="TRAMATREN" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Tipo de orden:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="info_ot_tipo_orden"
+                                    id="info_ot_tipo_orden" value="RT1" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">N° revisión:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="info_ot_numero_revision"
+                                    id="info_ot_numero_revision" value="1" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Clase de servicio:</label>
+                                <div class="col-md-7">
+                                  <select class="form-select" name="info_ot_tipo_servicio" id="info_ot_tipo_servicio"
+                                    required>
+                                    <option value="PARTICULAR" selected>PARTICULAR</option>
+                                    <option value="PÚBLICO">PÚBLICO</option>
+                                    <option value="GOBIERNO">GOBIERNO</option>
+                                  </select>
+
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Tipo de servicio:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="info_ot_clase_servicio"
+                                    id="info_ot_clase_servicio" value="PARTICULAR" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Ambito:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="info_ot_ambito" id="info_ot_ambito"
+                                    value="PARTICULAR" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12">
+                              <div class="row align-items-center">
+                                <label class="form-label col-md-5 fw-normal text-md-end mb-0">Tipo de
+                                  transporte:</label>
+                                <div class="col-md-7">
+                                  <input type="text" class="form-control" name="info_ot_tipo_transporte"
+                                    id="info_ot_tipo_transporte" value="PARTICULAR" required>
+                                  <div class="invalid-feedback">Por favor, ingresa un valor.</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 mt-0 mb-0">
+                        <div class="d-flex mt-0 w-100 pt-4 pb-0 gap-2 align-items-center justify-content-end">
+                          <a href="/home" class="btn py-2 border rounded fw-semibold">Cancelar</a>
+                          <a class="btn btn-primary-empresa py-2 fw-semibold" id="solicitarOrdenTrabajoANT"
+                            name="solicitarOrdenTrabajoANT">Solicitar orden de trabajo</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column mt-4 p-3 border rounded d-none" id="errorANT_SocilitarOrden">
+                <h5 class="text-danger">Error ANT</h5>
+                <div class="d-flex gap-2"><strong>Código de error:</strong> <span
+                    id="errorCodigo_SocilitarOrden"></span></div>
+                <div class="d-flex gap-2"><strong>Mensaje de ANT:</strong> <span
+                    id="errorMensaje_SocilitarOrden"></span></div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link href="/js/bootstrap.bundle.min.js">
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+
+  <script src="/js/consultasWS.js"></script>
+  <script src="/js/main.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+
+  <!-- jQuery y DataTables JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#miTabla').DataTable(); // Inicializa la tabla con DataTables
+    });
+  </script>
+
+</head>
+
+<body>
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-sidebar-position="fixed"
+    data-sidebartype="full">
+
+    <!--  Encabezado de pagina -->
+    <%- include('../body/sidebar') %>
+
+      <!-- Page Content -->
+      <div id="content-wrapper" class="content-wrapper">
+        <div class="container-fluid">
+
+          <!-- Contenido Principal -->
+          <div class="content px-2">
+
+            <div class="bg-primario-empresa rounded-top">
+              <div class="col-12 d-flex">
+                <h3 class="mb-0">Listado de rtvs</h3>
+              </div>
+
+              <p class="text-muted mb-4">listado de órdenes de trabajo de RTV</p>
+
+              <div class="border-bottom"></div>
+            </div>
+
+
+
+            <div class="mb-3 mt-3">
+
+
+
+              <table id="miTabla" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>N°</th>
+                    <th>id orden</th>
+                    <th>id orden ANT</th>
+                    <th>placa</th>
+                    <th>fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tesla</td>
+                    <td>Model Y</td>
+                    <td>64,950</td>
+                    <td>Model Y</td>
+                    <td>64,950</td>
+                  </tr>
+                  <tr>
+                    <td>Ford</td>
+                    <td>F-Series</td>
+                    <td>33,850</td>
+                    <td>Model Y</td>
+                    <td>64,950</td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+</body>
+
+</html>
